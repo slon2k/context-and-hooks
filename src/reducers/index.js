@@ -1,3 +1,7 @@
-import reducer from './theme'
+import themeReducer from './theme'
+import userReducer from './user'
 
-export default reducer
+export default ({ theme, user }, action) => ({
+    theme: themeReducer(theme, action),
+    user: userReducer(user, action)
+});

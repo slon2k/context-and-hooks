@@ -6,7 +6,8 @@ import Main from "../main";
 const App = () => {
 
     const initialState = {
-        theme: {primary: 'green'}
+        theme: {},
+        user: {}
     };
 
     return (
