@@ -1,7 +1,9 @@
 import React from 'react';
 import {StateProvider} from "../../state";
+import {ApiProvider} from "../../api";
 import reducer from '../../reducers'
 import Main from "../main";
+
 
 const App = () => {
 
@@ -12,7 +14,9 @@ const App = () => {
 
     return (
         <StateProvider initialState={initialState} reducer={reducer}>
-            <Main/>
+            <ApiProvider>
+                <Main/>
+            </ApiProvider>
         </StateProvider>
     )
 }
