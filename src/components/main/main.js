@@ -1,14 +1,20 @@
 import React, {useEffect} from 'react';
 import {useStateValue} from '../../context/state'
 import {useApi} from "../../context/api";
-import {fetchUsers} from "../../actions";
+import {fetchUsers, signIn} from "../../actions";
 
 const Main = () => {
     const [state, dispatch] = useStateValue();
     const api = useApi();
+
     const getUsers = () => fetchUsers(dispatch, api);
+    //const login = () => api.signIn({email: "test@example.com", password: "Example"});
+    const login = (credentials) => signIn(dispatch, api, credentials);
+    const register = () => api.signUp( {email: "test1@example.com", password: "Example"});
+
     useEffect(getUsers, []);
-    const {theme, user} = state;
+
+    const {theme, user, users} = state;
     const {color} = theme;
     const {name} = user;
     console.log('State: ', state);
@@ -21,13 +27,15 @@ const Main = () => {
             <div><span>User: </span> {name} </div>
             <button onClick={() => dispatch({type: "CHANGE_USER", name: "User 1"})}>User 1</button>
             <button onClick={() => dispatch({type: "CHANGE_USER", name: "User 2"})}>User 2</button>
-            <button
-                onClick={() => api.getUsers()
-                    .then(response => console.log(response))
-                    .catch(error => console.log(error))}
-            >
-                Get data
-            </button>
+            <br/>
+            <button onClick={getUsers}> Get data </button>
+            {users.status==='LOADING' && <div>Loading ...</div>}
+            {users.status==='ERROR' && <div>Unable to get data</div>}
+            <ul>
+                {users.items.map(item => <li key={item.id}>{item.name}</li>)}
+            </ul>
+            <button onClick={() => login({email: "test1@example.com", password: "Example"})}>Login</button>
+            <button onClick={register}>Register</button>
         </div>
 
     )

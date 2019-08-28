@@ -9,7 +9,8 @@ const App = () => {
 
     const initialState = {
         theme: {},
-        user: {}
+        user: {},
+        users: {status: "", items: []}
     };
 
     return (
