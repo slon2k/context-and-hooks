@@ -1,10 +1,13 @@
-import React from 'react';
-import {useStateValue} from '../../state'
-import {useApi} from "../../api";
+import React, {useEffect} from 'react';
+import {useStateValue} from '../../context/state'
+import {useApi} from "../../context/api";
+import {fetchUsers} from "../../actions";
 
 const Main = () => {
     const [state, dispatch] = useStateValue();
     const api = useApi();
+    const getUsers = () => fetchUsers(dispatch, api);
+    useEffect(getUsers, []);
     const {theme, user} = state;
     const {color} = theme;
     const {name} = user;
@@ -22,7 +25,8 @@ const Main = () => {
                 onClick={() => api.getUsers()
                     .then(response => console.log(response))
                     .catch(error => console.log(error))}
-            >Get data
+            >
+                Get data
             </button>
         </div>
 

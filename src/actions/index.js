@@ -1,5 +1,8 @@
 import * as actionTypes from './action-types';
 
-const fetchUsers = (dispatch) => {
-
+export const fetchUsers = (dispatch, api) => {
+    dispatch({type: actionTypes.FETCH_USERS_REQUEST });
+    api.getUsers()
+        .then(response => dispatch({type: actionTypes.FETCH_USERS_SUCCESS, items: [...response]}))
+        .catch(error => dispatch({type: actionTypes.FETCH_USERS_ERROR}))
 }

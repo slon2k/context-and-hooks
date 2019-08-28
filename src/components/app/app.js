@@ -1,6 +1,6 @@
 import React from 'react';
-import {StateProvider} from "../../state";
-import {ApiProvider} from "../../api";
+import {StateProvider} from "../../context/state";
+import {ApiProvider} from "../../context/api";
 import reducer from '../../reducers'
 import Main from "../main";
 
