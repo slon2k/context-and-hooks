@@ -8,7 +8,6 @@ const Main = () => {
     const api = useApi();
 
     const getUsers = () => fetchUsers(dispatch, api);
-    //const login = () => api.signIn({email: "test@example.com", password: "Example"});
     const login = (credentials) => signIn(dispatch, api, credentials);
     const register = () => api.signUp( {email: "test1@example.com", password: "Example"});
 

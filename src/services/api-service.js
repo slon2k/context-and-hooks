@@ -27,7 +27,7 @@ export default class apiService {
                 } else {
                     resolve(data)
                 }
-            }, 2000)
+            }, 500)
         });
     }
 
