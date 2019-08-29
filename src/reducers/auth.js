@@ -35,6 +35,17 @@ const auth = (state, action) => {
                 email: action.email,
                 errorMessage: ''
             };
+        case actionTypes.AUTH_REGISTER_REQUEST:
+            console.log("Action: ", action.type);
+            return {
+                status: "REQUEST",
+                isAuthenticated: false,
+                idToken: '',
+                refreshToken: '',
+                id: '',
+                email: '',
+                errorMessage: ''
+            };
         default:
             return state;
     }

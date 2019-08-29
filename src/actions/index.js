@@ -20,3 +20,17 @@ export const signIn = (dispatch, api, credentials) => {
         )
         .catch(error => dispatch({type: actionTypes.AUTH_LOGIN_FAILURE, errorMessage: error.message}))
 }
+
+export const signUp = (dispatch, api, credentials) => {
+    dispatch({type: actionTypes.AUTH_REGISTER_REQUEST});
+    api.signUp(credentials)
+        .then(response => dispatch({
+                type: actionTypes.AUTH_LOGIN_SUCCESS,
+                idToken: response.idToken,
+                id: response.localId,
+                refreshToken: response.refreshToken,
+                email: response.email
+            })
+        )
+        .catch(error => dispatch({type: actionTypes.AUTH_LOGIN_FAILURE, errorMessage: error.message}))
+}

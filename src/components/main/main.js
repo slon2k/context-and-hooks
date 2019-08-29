@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {useStateValue} from '../../context/state'
 import {useApi} from "../../context/api";
-import {fetchUsers, signIn} from "../../actions";
+import {fetchUsers, signIn, signUp} from "../../actions";
 
 const Main = () => {
     const [state, dispatch] = useStateValue();
@@ -9,7 +9,7 @@ const Main = () => {
 
     const getUsers = () => fetchUsers(dispatch, api);
     const login = (credentials) => signIn(dispatch, api, credentials);
-    const register = () => api.signUp( {email: "test1@example.com", password: "Example"});
+    const register = (credentials) => signUp(dispatch, api, credentials);
 
     useEffect(getUsers, []);
 
@@ -34,7 +34,7 @@ const Main = () => {
                 {users.items.map(item => <li key={item.id}>{item.name}</li>)}
             </ul>
             <button onClick={() => login({email: "test1@example.com", password: "Example"})}>Login</button>
-            <button onClick={register}>Register</button>
+            <button onClick={() => register({email: "test4@example.com", password: "Example"})}>Register</button>
         </div>
 
     )

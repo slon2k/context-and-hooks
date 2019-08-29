@@ -1,8 +1,8 @@
-import { API_KEY, BASE_URL } from './api.config.local.js'
+import { API_KEY, BASE_URL } from './api-config.local.js'
 const AUTH_URL =`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`;
 const SIGNUP_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`;
 
-const data = [
+const users = [
     {
         id: 101,
         name: "User 1"
@@ -17,7 +17,6 @@ const data = [
     },
 ];
 
-
 export default class apiService {
     getUsers() {
         return new Promise((resolve, reject) => {
@@ -25,7 +24,7 @@ export default class apiService {
                 if (Math.random() > 0.8) {
                     reject(new Error('Unable to get data'))
                 } else {
-                    resolve(data)
+                    resolve(users)
                 }
             }, 500)
         });
@@ -45,17 +44,17 @@ export default class apiService {
         return await result.json();
     }
 
-    signUp(credentials) {
-        fetch(SIGNUP_URL, {
+    signUp = async (credentials) => {
+        const result = await fetch(SIGNUP_URL, {
             method: "POST",
             mode: 'cors',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({...credentials, returnSecureToken: true}),
-        })
-            .then(res => res.json())
-            .then(data => console.log(data))
-            .catch(e => console.log(e))
-        ;
-
+        });
+        if (!result.ok) {
+            console.log(result);
+            throw new Error(`Sign Up Failed`);
+        }
+        return await result.json();
     }
 }
