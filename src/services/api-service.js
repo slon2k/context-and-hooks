@@ -1,3 +1,7 @@
+import { API_KEY, BASE_URL } from './api.config.local.js'
+const AUTH_URL =`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`;
+const SIGNUP_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`;
+
 const data = [
     {
         id: 101,
@@ -13,10 +17,6 @@ const data = [
     },
 ];
 
-const API_KEY = "AIzaSyC1O6cYzQnuEZZ1_9YYT3d6-MWNgU4hQNs";
-const BASE_URL = "https://slon2k-test-api.firebaseio.com/";
-const AUTH_URL =`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`;
-const SIGNUP_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`;
 
 export default class apiService {
     getUsers() {
